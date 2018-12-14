@@ -1,0 +1,58 @@
+import React, { Component } from "react";
+import { Card, Input, Button, Modal } from "antd";
+import * as helper from "../utils/Helper";
+class Base64TextArea extends Component {
+  state = { visible: false };
+
+  showModal = () => {
+    this.setState({
+      visible: true
+    });
+  };
+
+  handleOk = e => {
+    console.log(e);
+    this.setState({
+      visible: false
+    });
+  };
+
+  render() {
+    if (helper.isNull(this.props.text)) {
+      return <div />;
+    }
+    return (
+      <Card
+        extra={
+          <div>
+            {" "}
+            <Button type="danger" shape="circle" icon="share-alt" />{" "}
+            <Button type="danger" shape="circle" icon="delete" />{" "}
+            <Button
+              onClick={this.showModal}
+              type="danger"
+              shape="circle"
+              icon="eye"
+            />{" "}
+            <Button type="danger" shape="circle" icon="copy" />
+          </div>
+        }
+        title="Base64"
+      >
+        <Input.TextArea rows={7} value={this.props.text} />
+        <Modal
+          title="Preview an image (Base64 to Image)"
+          visible={this.state.visible}
+          onOk={this.handleOk}
+        >
+          <img
+            style={{ width: "100%" }}
+            src={"data:image/jpeg;" + this.props.text}
+          />
+        </Modal>
+      </Card>
+    );
+  }
+}
+
+export default Base64TextArea;
