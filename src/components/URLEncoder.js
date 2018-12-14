@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import { Input } from "antd";
 import * as helper from "../utils/Helper";
 import Base64TextArea from "./Base64TextArea";
+import ReactLoading from "react-loading";
 class URLEncoder extends Component {
   state = {
-    base64: undefined
+    base64: undefined,
+    loading: false
   };
 
   onConvert = value => {
@@ -12,11 +14,17 @@ class URLEncoder extends Component {
       helper.showMessage("Image URL is required.", "info");
       return;
     }
+    this.setState({
+      loading: true,
+      base64: undefined
+    });
     this.toDataURL(value, this.onCompleted);
   };
+
   onCompleted = base64 => {
     this.setState({
-      base64: base64
+      base64: base64,
+      loading: false
     });
   };
 
@@ -43,6 +51,20 @@ class URLEncoder extends Component {
           size="large"
           onSearch={this.onConvert}
         />
+        {this.state.loading ? (
+          <center>
+            <div style={{ marginTop: "5%" }}>
+              <ReactLoading
+                type="spin"
+                color="#1890ff"
+                height={"20%"}
+                width={"20%"}
+              />
+            </div>
+          </center>
+        ) : (
+          <div />
+        )}
         <div style={{ marginTop: "5%" }}>
           <Base64TextArea text={this.state.base64} />
         </div>

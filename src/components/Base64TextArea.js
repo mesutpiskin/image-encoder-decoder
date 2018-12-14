@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, Input, Button, Modal } from "antd";
+import { Card, Input, Button, Modal, Checkbox } from "antd";
 import * as helper from "../utils/Helper";
 class Base64TextArea extends Component {
   state = { visible: false };
@@ -37,13 +37,20 @@ class Base64TextArea extends Component {
             <Button type="danger" shape="circle" icon="copy" />
           </div>
         }
-        title="Base64"
+        title={
+          <div style={{ color: "#1890ff" }}>
+            Base64
+            <br />
+            Prefix: {this.props.text.split(";")[0]}
+          </div>
+        }
       >
         <Input.TextArea rows={7} value={this.props.text} />
         <Modal
           title="Preview an image (Base64 to Image)"
           visible={this.state.visible}
           onOk={this.handleOk}
+          onCancel={this.handleOk}
         >
           <img
             style={{ width: "100%" }}
