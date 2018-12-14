@@ -10,13 +10,16 @@ class ImageUploader extends Component {
   beforeUpload = file => {
     const isJPG = file.type === "image/jpeg";
     const isPNG = file.type === "image/png";
-    if (!(isJPG || isPNG)) {
+    const isGIF = file.type === "image/gif";
+    const isSVG = file.type === "image/svg";
+    const isWEBP = file.type === "image/webp";
+    if (!(isJPG || isPNG || isGIF || isSVG || isWEBP)) {
       helper.showMessage("You can only upload image file!", "info");
       return false;
     }
-    const isLt2M = file.size / 1024 / 1024 < 2;
+    const isLt2M = file.size / 1024 / 1024 < 3;
     if (!isLt2M) {
-      helper.showMessage("Image must smaller than 2MB!", "info");
+      helper.showMessage("Image must smaller than 3MB!", "info");
       return false;
     }
     return isJPG && isLt2M;
@@ -31,7 +34,6 @@ class ImageUploader extends Component {
         `${info.file.name} file uploaded successfully.`,
         "success"
       );
-
     } else if (status === "error") {
       //helper.showMessage(`${info.file.name} file upload failed.`, "error");
     }
