@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, Input, Button, Modal, Checkbox } from "antd";
+import { Card, Input, Button, Modal } from "antd";
 import * as helper from "../utils/Helper";
 class Base64TextArea extends Component {
   state = { visible: false };

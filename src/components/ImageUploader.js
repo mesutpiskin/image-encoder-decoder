@@ -1,15 +1,56 @@
 import React, { Component } from "react";
-import { Upload, Icon} from "antd";
+import { Upload, Icon } from "antd";
 import Base64TextArea from "./Base64TextArea";
-
+import * as helper from "../utils/Helper";
 class ImageUploader extends Component {
   state = {
-    base64: undefined
+    fileList: undefined
   };
+
+  beforeUpload = file => {
+    const isJPG = file.type === "image/jpeg";
+    const isPNG = file.type === "image/png";
+    if (!(isJPG || isPNG)) {
+      helper.showMessage("You can only upload image file!", "info");
+      return false;
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      helper.showMessage("Image must smaller than 2MB!", "info");
+      return false;
+    }
+    return isJPG && isLt2M;
+  };
+
+  onChange = info => {
+    const status = info.file.status;
+    if (status !== "uploading") {
+    }
+    if (status === "done") {
+      helper.showMessage(
+        `${info.file.name} file uploaded successfully.`,
+        "success"
+      );
+
+    } else if (status === "error") {
+      //helper.showMessage(`${info.file.name} file upload failed.`, "error");
+    }
+    this.setState({
+      fileList: info.fileList
+    });
+  };
+
   render() {
     return (
       <div>
-        <Upload.Dragger>
+        <Upload.Dragger
+          beforeUpload={this.beforeUpload}
+          fileList={this.state.fileList}
+          onChange={this.onChange}
+          listType="picture"
+          action="//jsonplaceholder.typicode.com/posts/"
+          multiple={false}
+        >
           <p className="ant-upload-drag-icon">
             <Icon type="upload" />
           </p>
@@ -22,7 +63,15 @@ class ImageUploader extends Component {
           </p>
         </Upload.Dragger>
         <div style={{ marginTop: "5%" }}>
-          <Base64TextArea text={this.state.base64} />
+          {helper.isNull(this.state.fileList) ? (
+            <div />
+          ) : (
+            <Base64TextArea
+              text={
+                this.state.fileList[this.state.fileList.length - 1].thumbUrl
+              }
+            />
+          )}
         </div>
       </div>
     );
