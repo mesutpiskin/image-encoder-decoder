@@ -12,7 +12,8 @@ import ImageUploader from "../components/ImageUploader";
 import WebCam from "../components/WebCam";
 const styles = theme => ({
   appBar: {
-    position: "relative"
+    position: "relative",
+    background: "#1890FF"
   },
   icon: {
     marginRight: theme.spacing.unit * 2
