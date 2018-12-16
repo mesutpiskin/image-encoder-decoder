@@ -12,9 +12,11 @@
     "@material-ui/icons": "^3.0.1",
     "antd": "^3.11.2",
     "react": "^16.6.3",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.6.3",
     "react-loading": "^2.0.3",
-    "react-scripts": "2.1.1"
+    "react-scripts": "2.1.1",
+    "react-webcam": "^1.0.4"
   },
   "scripts": {
     "start": "react-scripts start",

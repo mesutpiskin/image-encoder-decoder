@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { Upload, Icon } from "antd";
+import { Upload, Icon, Button } from "antd";
 import Base64TextArea from "./Base64TextArea";
 import * as helper from "../utils/Helper";
 class ImageUploader extends Component {
   state = {
-    fileList: undefined
+    fileList: [],
+    image: undefined
   };
 
   beforeUpload = file => {
@@ -26,6 +27,7 @@ class ImageUploader extends Component {
   };
 
   onChange = info => {
+    console.log(info);
     const status = info.file.status;
     if (status !== "uploading") {
     }
@@ -41,6 +43,13 @@ class ImageUploader extends Component {
       fileList: info.fileList
     });
   };
+  convertHandle = e => {
+    let img = this.state.fileList[this.state.fileList.length - 1];
+    this.setState({
+      image: img.thumbUrl
+    });
+    this.forceUpdate();
+  };
 
   render() {
     return (
@@ -50,7 +59,7 @@ class ImageUploader extends Component {
           fileList={this.state.fileList}
           onChange={this.onChange}
           listType="picture"
-          action="//jsonplaceholder.typicode.com/posts/"
+          action={"//localhost:3000/" + this.state.image}
           multiple={false}
         >
           <p className="ant-upload-drag-icon">
@@ -65,15 +74,20 @@ class ImageUploader extends Component {
           </p>
         </Upload.Dragger>
         <div style={{ marginTop: "5%" }}>
-          {helper.isNull(this.state.fileList) ? (
-            <div />
+          {this.state.fileList.length >= 1 ? (
+            <center>
+              <div>
+                <Button type="primary" onClick={this.convertHandle}>
+                  Convert to Base64
+                </Button>
+              </div>
+            </center>
           ) : (
-            <Base64TextArea
-              text={
-                this.state.fileList[this.state.fileList.length - 1].thumbUrl
-              }
-            />
+            <div />
           )}
+          <div style={{ marginTop: "2%" }}>
+            <Base64TextArea text={this.state.image} />
+          </div>
         </div>
       </div>
     );

@@ -9,6 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import FromURL from "../components/URLEncoder";
 import ImageUploader from "../components/ImageUploader";
+import WebCam from "../components/WebCam";
 const styles = theme => ({
   appBar: {
     position: "relative"
@@ -86,7 +87,9 @@ function Home(props) {
                 <Tabs.TabPane tab="Import From URL" key="2">
                   <FromURL />
                 </Tabs.TabPane>
-                <Tabs.TabPane tab="Take From Webcam" key="3" />
+                <Tabs.TabPane tab="Take From Webcam" key="3">
+                  <WebCam />
+                </Tabs.TabPane>
               </Tabs>
             </div>
           </div>
