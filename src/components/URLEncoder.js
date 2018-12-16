@@ -14,10 +14,10 @@ class URLEncoder extends Component {
       helper.showMessage("Image URL is required.", "info");
       return;
     }
-    if (!helper.isValidURL(value)) {
+/*     if (!helper.isValidURL(value)) {
       helper.showMessage("Image URL is not valid.", "error");
       return;
-    }
+    } */
     this.setState({
       loading: true,
       base64: undefined

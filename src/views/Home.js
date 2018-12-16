@@ -24,6 +24,9 @@ const styles = theme => ({
     margin: "0 auto",
     padding: `${theme.spacing.unit * 8}px 0 ${theme.spacing.unit * 6}px`
   },
+  toolbarTitle: {
+    flexGrow: 1
+  },
   heroButtons: {
     marginTop: theme.spacing.unit * 4
   },
@@ -65,6 +68,8 @@ function Home(props) {
           <Typography variant="h6" color="inherit" noWrap>
             Image to Base64 Converter
           </Typography>
+          <div className={classes.toolbarTitle} />
+          <iframe src="https://ghbtns.com/github-btn.html?user=mesutpiskin&repo=image-encoder-decoder&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
         </Toolbar>
       </AppBar>
       <main>
