@@ -8,8 +8,10 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import FromURL from "../components/URLEncoder";
-import ImageUploader from "../components/ImageUploader";
 import WebCam from "../components/WebCam";
+import Base64Converter from "../components/Base64Converter";
+
+
 const styles = theme => ({
   appBar: {
     position: "relative",
@@ -88,7 +90,7 @@ function Home(props) {
             <div className={classes.heroButtons}>
               <Tabs>
                 <Tabs.TabPane tab="Import From File" key="1">
-                  <ImageUploader />
+                  <Base64Converter />
                 </Tabs.TabPane>
                 <Tabs.TabPane tab="Import From URL" key="2">
                   <FromURL />
